@@ -12,7 +12,7 @@ class MainVerticle : AbstractVerticle() {
     val route = Router.router(vertx)
     route.route("/some/path") // this handler will ensure that the response is serialized to json
       // the content type is set to "application/json"
-      .respond { ctx -> Future.succeededFuture(JsonObject().put("hello", "world"))}
+      .respond { ctx -> Future.succeededFuture(JsonObject().put("hello", "world")) }
 
     vertx
       .createHttpServer()
@@ -22,7 +22,7 @@ class MainVerticle : AbstractVerticle() {
           startPromise.complete()
           println("HTTP server started on port 8888")
         } else {
-          startPromise.fail(http.cause());
+          startPromise.fail(http.cause())
         }
       }
   }
