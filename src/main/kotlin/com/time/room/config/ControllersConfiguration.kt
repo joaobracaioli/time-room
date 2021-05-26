@@ -5,5 +5,5 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val controllersModule = module {
-  single<TrainingController>(named("controllers")) { TrainingController() }
+  single(named("controllers")) { TrainingController() }
 }
