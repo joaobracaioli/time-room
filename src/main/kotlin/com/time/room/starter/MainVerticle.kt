@@ -1,16 +1,18 @@
 package com.time.room.starter
 
-import com.time.room.config.ControllersConfiguration
 import com.time.room.config.controllersModule
+import com.time.room.controllers.TrainingController
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Vertx
-import org.kodein.di.DI
-import org.kodein.di.instance
+import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
+import org.koin.java.KoinJavaComponent.inject
 
-class MainVerticle(private val di: DI) : AbstractVerticle() {
+class MainVerticle() : AbstractVerticle() {
 
   override fun start() {
-    val controllers by di.instance<ControllersConfiguration>()
+    val controllers : TrainingController by inject(clazz = TrainingController::class.java,  qualifier = named("controllers"))
+
     val vertx = Vertx.vertx()
     vertx
       .createHttpServer()
@@ -20,10 +22,12 @@ class MainVerticle(private val di: DI) : AbstractVerticle() {
 }
 
 fun main() {
-  val modules = DI {
-    importAll(
-      controllersModule
-    )
+  startKoin {
+    // use Koin logger
+    printLogger()
+    // declare modules
+    modules(controllersModule)
   }
-  MainVerticle(modules).start()
+
+  MainVerticle().start()
 }

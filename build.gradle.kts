@@ -42,7 +42,9 @@ dependencies {
   implementation("io.vertx:vertx-lang-kotlin")
   implementation(kotlin("stdlib-jdk8"))
 
-  implementation("org.kodein.di:kodein-di:7.5.0")
+
+  implementation("io.insert-koin:koin-core:$koinVersion")
+  // implementation("org.kodein.di:kodein-di:7.5.0")
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
